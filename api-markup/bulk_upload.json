@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "properties": {
+    "bulkUploadId": {
+      "id": "http://jsonschema.net/0/bulkUploadId",
+      "type": "string"
+    },
+    "fileName": {
+      "id": "http://jsonschema.net/0/fileName",
+      "type": "string"
+    },"fileSize": {
+        "id": "http://jsonschema.net/1/fileSize",
+        "type": "string"
+      },
+    "status": {
+      "id": "http://jsonschema.net/0/status",
+      "type": "string"
+    },
+    "dateCreated": {
+      "id": "http://jsonschema.net/0/dateCreated",
+      "type": "string"
+    },
+    "dateUpdated": {
+      "id": "http://jsonschema.net/0/dateUpdated",
+      "type": "string"
+    }
+  },
+  "required": [
+    "bulkUploadId",
+    "fileName",
+    "fileSize",
+    "status",
+    "dateCreated",
+    "dateUpdated"
+  ]
+}

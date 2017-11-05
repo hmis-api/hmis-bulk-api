@@ -1,0 +1,15 @@
+[{
+	"bulkUploadId": 1,
+	"fileName": "1-asdf-asdf-assdfasfd-dd.xml",
+	"fileSize" : "3298",
+	"status"   : "FILE",
+	"dateCreated": "6/06/2016",
+	"dateUpdated": "6/06/2016"
+}, {
+	"bulkUploadId": 3,
+	"fileName": "2-asdf-asdf-assdfasfd-dd.xml",
+	"fileSize" : "3298",
+	"status"   : "INITIAL",
+	"dateCreated": "6/06/2016",
+	"dateUpdated": "6/06/2016"
+}]
