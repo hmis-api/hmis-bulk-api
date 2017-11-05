@@ -1,9 +1,9 @@
 #%RAML 1.0
-title: Global Household
+title: bulk upload
 version: 1.0.0
 protocols:
   - HTTP
-baseUri: https://www.hmislynk.com/globalhouseholds/rest
+baseUri: https://www.hmislynk.com/hmis-upload-service/rest
 mediaType: application/json
 securedBy: [oauth_2_0]
 securitySchemes:
@@ -11,17 +11,17 @@ securitySchemes:
 types:
   bulk_upload: !include bulk_upload.json
   bulk_upload_id: !include bulk_upload_id.json
-  bulk_uploads: !include bulk_uploads.json
-  bulk_uploads_ids: !include bulk_uploads_ids.json
- 
-/bulk-uploads:
+  bulk_upload: !include bulk_upload.json
+  bulk_upload_ids: !include bulk_upload_ids.json
+
+/bulk-upload:
   get:
-    description: gets a set of global households
+    description: gets a set of bulk upload
     responses:
       '200':
         body:
           application/json:
-            example: !include bulk_uploads_ids_example.json
+            example: !include bulk_upload_ids_example.json
       '401':
         body:
           application/json:
@@ -37,20 +37,20 @@ types:
     queryParameters:
       inactive:
         required: false
-        description: Filter the list of global household by inactive status.
+        description: Filter the list of bulk upload.
         example: true
         type: boolean
   post:
-    description: saves the multiple global household data.
+    description: upload a HUD Xml/CSV file for processing.
     body:
       application/json:
-        type: bulk_uploads
-        example: !include bulk_uploads_example.json
+        type: bulk_upload
+        example: !include bulk_upload_example.json
     responses:
       '200':
         body:
           application/json:
-            example: !include bulk_uploads_ids_example.json
+            example: !include bulk_upload_ids_example.json
       '401':
         body:
           application/json:
@@ -61,39 +61,17 @@ types:
         body:
           application/json:
             example:
-              message: Resource not found
+              message: Resource not foundx
             required: false
-  put:
-    description: update the multiple global household data.
-    body:
-      application/json:
-          type: bulk_uploads_ids
-          example: !include bulk_uploads_ids_example.json
-    responses:
-      '200':
-        body:
-          application/json:
-            example: !include bulk_uploads_ids_example.json
-      '401':
-        body:
-          application/json:
-            example:
-              message: ' Unauthorized'
-            required: false
-      '500':
-        body:
-          application/json:
-            example:
-              message: Resource not found
-            required: false
+
 
   /{bulk_upload_id}:
     uriParameters:
       bulk_upload_id: {}
     displayName: retreive
-    description: 'global household services for get,deactivate and delete.'
+    description: 'bulk upload services for get,deactivate and delete.'
     get:
-      description: retreives global household  details.
+      description: retreives bulk upload  details.
       responses:
         '200':
           body:
@@ -112,13 +90,13 @@ types:
                 errorMessage: internal server error
               required: false
     delete:
-      description: to delete global household on the basis of uuid
+      description: to delete bulk upload on the basis of uuid
       responses:
         '200':
           body:
             application/json:
               example:
-                message: household successfully deleted
+                message: Bulk Upload successfully deleted
               required: false
         '401':
           body:
@@ -133,7 +111,7 @@ types:
                 message: ' Internal Server Error - retry request'
               required: false
     put:
-      description: for updating global housing data.
+      description: for updating bulk upload status.
       body:
         application/json:
           type: bulk_upload_id
@@ -143,7 +121,7 @@ types:
           body:
             application/json:
               example:
-                message: household successfully updated
+                message: Bulk Upload successfully updated
               required: false
         '401':
           body:
@@ -157,141 +135,3 @@ types:
               example:
                 message: ' Internal Server Error - retry request'
               required: false
-    /members:
-      description: Operations on global household membership
-      get:
-        responses:
-          '200':
-            body:
-              application/json:
-                example: !include bulk_uploads_ids_example.json
-                required: false
-          '401':
-            body:
-              application/json:
-                example:
-                  message: ' Unauthorized'
-                required: false
-          '500':
-            body:
-              application/json:
-                example:
-                  message: Resource not found
-                required: false
-      post:
-        responses:
-          '200':
-            body:
-              application/json:
-                example:
-                  message: 'address is updated '
-                required: false
-          '401':
-            body:
-              application/json:
-                example:
-                  message: ' Unauthorized'
-                required: false
-          '500':
-            body:
-              application/json:
-                example:
-                  message: Resource not found
-                required: false
-        body:
-          application/json:
-            example: !include household_members_ids.json
-      put:
-        body:
-          application/json:
-            type: household_members_ids
-            example: !include household_members_ids_example.json
-        responses:
-          '200':
-            body:
-              application/json:
-                example:
-                  message: 'members updated '
-                required: false
-          '401':
-            body:
-              application/json:
-                example:
-                  message: ' Unauthorized'
-                required: false
-          '500':
-            body:
-              application/json:
-                example:
-                  message: Resource not found
-                required: false
-      /{member_id}:
-        uriParameters:
-          member_id: {}
-        get:
-          description: get the member record based on member_id.
-          responses:
-            '200':
-              body:
-                application/json:
-                  example: !include household_member_id_example.json
-                  required: false
-            '401':
-              body:
-                application/json:
-                  example:
-                    message: ' Unauthorized'
-                  required: false
-            '500':
-              body:
-                application/json:
-                  example:
-                    message: Resource not found
-                  required: false
-        put:
-          description: update the member record.
-          body:
-            application/json:
-              type: household_members_id
-              example: !include household_member_id_example.json
-              required: false
-          responses:
-            '200':
-              body:
-                application/json:
-                  example:
-                    message: member successfully updated.
-                  required: false
-            '401':
-              body:
-                application/json:
-                  example:
-                    message: ' Unauthorized'
-                  required: false
-            '500':
-              body:
-                application/json:
-                  example:
-                    message: Resource not found
-                  required: false
-        delete:
-          description: delete the household member.
-          responses:
-            '200':
-              body:
-                application/json:
-                  example:
-                    message: member deleted successfully.
-                  required: false
-            '401':
-              body:
-                application/json:
-                  example:
-                    message: ' Unauthorized'
-                  required: false
-            '500':
-              body:
-                application/json:
-                  example:
-                    message: Resource not found
-                  required: false
