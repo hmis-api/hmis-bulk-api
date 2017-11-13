@@ -4,33 +4,39 @@
   "type": "object",
   "properties": {
     "bulkUploadId": {
-      "id": "http://jsonschema.net/0/bulkUploadId",
+      "id": "http://jsonschema.net/id",
       "type": "string"
     },
     "fileName": {
-      "id": "http://jsonschema.net/0/fileName",
+      "id": "http://jsonschema.net/fileName",
       "type": "string"
-    },"fileSize": {
-        "id": "http://jsonschema.net/1/fileSize",
-        "type": "string"
-      },
+    },
+    "fileSize": {
+      "id": "http://jsonschema.net/fileSize",
+      "type": "string"
+    },
+    "projectGroupCode": {
+      "id": "http://jsonschema.net/projectGroupCode",
+      "type": "string"
+    },
     "status": {
-      "id": "http://jsonschema.net/0/status",
+      "id": "http://jsonschema.net/status",
       "type": "string"
     },
     "dateCreated": {
-      "id": "http://jsonschema.net/0/dateCreated",
+      "id": "http://jsonschema.net/dateCreated",
       "type": "string"
     },
     "dateUpdated": {
-      "id": "http://jsonschema.net/0/dateUpdated",
+      "id": "http://jsonschema.net/dateUpdated",
       "type": "string"
     }
   },
   "required": [
-    "bulkUploadId",
+    "id",
     "fileName",
     "fileSize",
+    "projectGroupCode",
     "status",
     "dateCreated",
     "dateUpdated"

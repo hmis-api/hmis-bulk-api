@@ -1,8 +1,11 @@
 {
-	"bulkUploadId": 2,
-	"fileName": "asdf-asdf-assdfasfd-dd.xml",
-	"fileSize" : "3298",
-	"status"   : "FILE",
-	"dateCreated": "6/06/2016",
-	"dateUpdated": "6/06/2016"
+"bulkupload": {
+"dateUpdated": "11-12-2017",
+"fileName": "HUD_4_0_Testing.xml",
+"fileSize": "62 KB",
+"year": 2014,
+"projectGroupCode": "CP0004",
+"status": "INITIAL ",
+"id": 375
+}
 }

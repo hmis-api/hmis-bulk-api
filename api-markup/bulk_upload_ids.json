@@ -1,78 +1,44 @@
-
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "http://jsonschema.net",
-  "type": "array",
-  "items": [
-    {
-      "id": "http://jsonschema.net/0",
-      "type": "object",
-      "properties": {
-        "bulkUploadId": {
-          "id": "http://jsonschema.net/0/bulkUploadId",
-          "type": "string"
-        },
-        "fileName": {
-          "id": "http://jsonschema.net/0/fileName",
-          "type": "string"
-        },"fileSize": {
-            "id": "http://jsonschema.net/1/fileSize",
-            "type": "string"
-          },
-        "status": {
-          "id": "http://jsonschema.net/0/status",
-          "type": "string"
-        },
-        "dateCreated": {
-          "id": "http://jsonschema.net/0/dateCreated",
-          "type": "string"
-        },
-        "dateUpdated": {
-          "id": "http://jsonschema.net/0/dateUpdated",
-          "type": "string"
-        }
-      },
-      "required": [
-        "bulkUploadId",
-        "fileName",
-        "fileSize",
-        "status",
-        "dateCreated",
-        "dateUpdated"
-      ]
+  "type": "object",
+  "properties": {
+    "bulkUploadId": {
+      "id": "http://jsonschema.net/id",
+      "type": "string"
     },
-    {
-      "id": "http://jsonschema.net/1",
-      "type": "object",
-      "properties": {
-        "bulkUploadId": {
-          "id": "http://jsonschema.net/1/bulkUploadId",
-          "type": "string"
-        },
-        "fileName": {
-          "id": "http://jsonschema.net/1/fileName",
-          "type": "string"
-        },
-        "fileSize": {
-          "id": "http://jsonschema.net/1/fileSize",
-          "type": "string"
-        },"status": {
-            "id": "http://jsonschema.net/1/status",
-            "type": "string"
-          },
-        "dateCreated": {
-          "id": "http://jsonschema.net/1/dateCreated",
-          "type": "string"
-        },
-        "dateUpdated": {
-          "id": "http://jsonschema.net/1/dateUpdated",
-          "type": "string"
-        }
-      }
+    "fileName": {
+      "id": "http://jsonschema.net/fileName",
+      "type": "string"
+    },
+    "fileSize": {
+      "id": "http://jsonschema.net/fileSize",
+      "type": "string"
+    },
+    "projectGroupCode": {
+      "id": "http://jsonschema.net/projectGroupCode",
+      "type": "string"
+    },
+    "status": {
+      "id": "http://jsonschema.net/status",
+      "type": "string"
+    },
+    "dateCreated": {
+      "id": "http://jsonschema.net/dateCreated",
+      "type": "string"
+    },
+    "dateUpdated": {
+      "id": "http://jsonschema.net/dateUpdated",
+      "type": "string"
     }
-  ],
+  },
   "required": [
-    "0",
-    "1"
+    "id",
+    "fileName",
+    "fileSize",
+    "projectGroupCode",
+    "status",
+    "dateCreated",
+    "dateUpdated"
   ]
 }

@@ -4,11 +4,19 @@
   "type": "object",
   "properties": {
     "bulkUploadId": {
-      "id": "http://jsonschema.net/bulkUploadId",
+      "id": "http://jsonschema.net/id",
       "type": "string"
     },
     "fileName": {
       "id": "http://jsonschema.net/fileName",
+      "type": "string"
+    },
+    "fileSize": {
+      "id": "http://jsonschema.net/fileSize",
+      "type": "string"
+    },
+    "projectGroupCode": {
+      "id": "http://jsonschema.net/projectGroupCode",
       "type": "string"
     },
     "status": {
@@ -25,8 +33,10 @@
     }
   },
   "required": [
-    "bulkUploadId",
+    "id",
     "fileName",
+    "fileSize",
+    "projectGroupCode",
     "status",
     "dateCreated",
     "dateUpdated"
