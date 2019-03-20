@@ -1,257 +1,182 @@
-openapi: 3.0.0
+swagger: '2.0'
 info:
-  title: bulk upload
+  description: |
+    HMIS upload Service
   version: 1.0.0
-servers:
-  - url: 'http://www.hmislynk.com/hmis-upload-service/rest'
-  - url: 'https://www.hmislynk.com/hmis-upload-service/rest'
+  title: HMIS upload Service
+  contact:
+    email: sandeep.dolia@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# host: petstore.swagger.io
+# basePath: /v2
+tags:
+- name: bulk-upload
+  description: Hmis bulk uploader Apis.
+# schemes:
+# - http
 paths:
   /bulk-upload:
     get:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  BulkUploads:
-                    pagination:
-                      from: 0
-                      returned: 1
-                      total: 1
-                      maximum: 30
-                      sort: {}
-                    bulkUploads:
-                      - dateCreated: 10-07-2017
-                        dateUpdated: 10-07-2017
-                        fileName: 2017.xml
-                        fileSize: 0 bytes
-                        year: 2017
-                        projectGroupCode: CP0004
-                        status: 'STAGING   '
-                        id: 336
-        '401':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Unauthorized'
-        '500':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  errorMessage: internal server error
-      description: gets a set of bulk upload
-      operationId: GET_bulk-upload
+      tags:
+      - bulk-upload
+      summary: Gets uploads by status
+      description: Get all the uploads by status.The possible values for status are INITIAL, STAGING, LIVE and ERROR.
+      operationId: findUploadByStatus
+      produces:
+      - application/json
+      - application/xml
       parameters:
-        - name: inactive
-          in: query
-          description: Filter the list of bulk upload.
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: true
+        type: array
+        items:
+          type: string
+          enum:
+          - available
+          - pending
+          - sold
+          default: available
+        collectionFormat: multi
+      responses:
+        200:
+          description: successful operation
           schema:
-            type: boolean
-    post:
-      responses:
-        default:
-          description: ''
-      description: upload a HUD Xml/CSV file for processing.
-      operationId: POST_bulk-upload
-  '/bulk-upload/{bulk_upload_id}':
+            type: array
+            items:
+              $ref: '#/definitions/bulkUpload'
+        400:
+          description: Invalid status value
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /bulk-upload/{uploadId}:
     get:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  bulkupload:
-                    dateUpdated: 11-12-2017
-                    fileName: HUD_4_0_Testing.xml
-                    fileSize: 62 KB
-                    year: 2014
-                    projectGroupCode: CP0004
-                    status: 'INITIAL '
-                    id: 375
-        '401':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Unauthorized'
-        '500':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  errorMessage: internal server error
-      description: retreives bulk upload  details.
-      operationId: GET_bulk-upload-bulk_upload_id
-    delete:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: Bulk Upload successfully deleted
-        '401':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Unauthorized'
-        '500':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Internal Server Error - retry request'
-      description: to delete bulk upload on the basis of uuid
-      operationId: DELETE_bulk-upload-bulk_upload_id
-    put:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: Bulk Upload successfully updated
-        '401':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Unauthorized'
-        '500':
-          description: ''
-          content:
-            application/json:
-              schema:
-                example:
-                  message: ' Internal Server Error - retry request'
-      description: for updating bulk upload status.
-      operationId: PUT_bulk-upload-bulk_upload_id
-      requestBody:
-        content:
-          application/json:
-            example:
-              bulkupload:
-                dateCreated: 11-13-2017
-                fileName: HUD_4_0_Testing.xml
-                fileSize: '63981'
-                year: 2014
-                projectGroupCode: CP0004
-                status: INITIAL
-                id: 379
-            schema:
-              $ref: '#/components/schemas/bulk_upload_id'
-        required: true
-    parameters:
-      - name: bulk_upload_id
+      tags:
+      - bulk-upload
+      summary: Find bulk upload by ID
+      description: Returns a single upload
+      operationId: getUploadById
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: uploadId
         in: path
+        description: ID of upload to return
         required: true
-        schema:
-          type: string
-components:
-  schemas:
-    bulk_upload:
-      required:
-        - fileName
-        - fileSize
-        - projectGroupCode
-        - status
-        - dateCreated
-        - dateUpdated
-      type: object
-      properties:
-        bulkUploadId:
-          type: string
-        fileName:
-          type: string
-        fileSize:
-          type: string
-        projectGroupCode:
-          type: string
-        status:
-          type: string
-        dateCreated:
-          type: string
-        dateUpdated:
-          type: string
-    bulk_upload_id:
-      required:
-        - fileName
-        - fileSize
-        - projectGroupCode
-        - status
-        - dateCreated
-        - dateUpdated
-      type: object
-      properties:
-        bulkUploadId:
-          type: string
-        fileName:
-          type: string
-        fileSize:
-          type: string
-        projectGroupCode:
-          type: string
-        status:
-          type: string
-        dateCreated:
-          type: string
-        dateUpdated:
-          type: string
-    bulk_upload_ids:
-      required:
-        - fileName
-        - fileSize
-        - projectGroupCode
-        - status
-        - dateCreated
-        - dateUpdated
-      type: object
-      properties:
-        bulkUploadId:
-          type: string
-        fileName:
-          type: string
-        fileSize:
-          type: string
-        projectGroupCode:
-          type: string
-        status:
-          type: string
-        dateCreated:
-          type: string
-        dateUpdated:
-          type: string
-  responses: {}
-  parameters: {}
-  examples: {}
-  requestBodies: {}
-  headers: {}
-  securitySchemes:
-    oauth_2_0:
-      description: |
-        The HMIS API supports OAuth 2.0 for authenticating all API requests.
-      type: oauth2
-      flows:
-        password:
-          tokenUrl: 'https://hmislynk.com/hmis-authorization-service/rest/token'
-          scopes:
-            user: ''
-            administrator: ''
-  links: {}
-  callbacks: {}
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/bulkUpload'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Pet not found
+      security:
+      - api_key: []
+    post:
+      tags:
+      - bulk-upload
+      summary: Upload Hmis file by passing version in the path param.
+      operationId: createUploadWithForm
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: uploadId
+        in: path
+        description: Hud version of hmis upload. UploadId= Hud versionId
+        required: true
+        type: integer
+        format: string
+      - name: file
+        in: formData
+        description: Updated name of the Upload
+        required: false
+        type: string
+      responses:
+        405:
+          description: Invalid input
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: http://petstore.swagger.io/oauth/dialog
+    flow: implicit
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  bulkUploads:
+    type: object
+    required:
+    - bulkUpload
+  bulkUpload:
+    type: object
+    required:
+    - id
+    - fileName
+    - fileSize
+    - hudVersion
+    - dateCreated
+    - projectGroupCode
+    - status
+    - year
+    properties:
+      id:
+        type: integer
+        format: int64
+      fileName:
+        type: string
+        example: doggie
+      fileSize:
+        type: integer
+        format: int64
+      hudVersion:
+        type: integer
+        format: int64
+      dateCreated:
+        type: string
+        example: 03/4/2019
+      projectGroupCode:
+        type: string
+        example: XXXXXX
+      year:
+        type: integer
+        format: int64
+      status:
+        type: string
+        description: pet status in the store
+        enum:
+        - INITIAL
+        - ERROR
+        - STAGING
+        - LIVE
+    xml:
+      name: bulkUpload
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: hslynk.com
+basePath: /hmis-upload-service/rest
+schemes:
+ - https
+ - http
