@@ -67,7 +67,7 @@ paths:
       parameters:
       - name: uploadId
         in: path
-        description: ID of upload to return
+        description: HUD schema version, the possible values are 401, 411,51,611,612.
         required: true
         type: integer
         format: int64
