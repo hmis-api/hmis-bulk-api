@@ -67,7 +67,7 @@ paths:
       parameters:
       - name: uploadId
         in: path
-        description: HUD schema version, the possible values are 401, 411,51,611,612.
+        description: Upload ID for bulkUpload.
         required: true
         type: integer
         format: int64
@@ -95,7 +95,7 @@ paths:
       parameters:
       - name: uploadId
         in: path
-        description: Hud version of hmis upload. UploadId= Hud versionId
+        description: HUD schema version,the possible values are 401, 411,51,611,612.
         required: true
         type: integer
         format: string
