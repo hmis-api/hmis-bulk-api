@@ -5,12 +5,10 @@ info:
   version: 1.0.0
   title: HMIS upload Service
   contact:
-    email: sandeep.dolia@gmail.com
+    email: support@hslynk.com
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-# host: petstore.swagger.io
-# basePath: /v2
+    name: Hslynk
+    url: https://github.com/hmis-api/
 tags:
 - name: bulk-upload
   description: Hmis bulk uploader Apis.
@@ -51,9 +49,9 @@ paths:
         400:
           description: Invalid status value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - hmis_auth:
+        - write:uploads
+        - read:uploads
   /bulk-upload/{uploadId}:
     get:
       tags:
@@ -108,17 +106,17 @@ paths:
         405:
           description: Invalid input
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - hmis_auth:
+        - write:uploads
+        - read:uploads
 securityDefinitions:
-  petstore_auth:
+  hmis_auth:
     type: oauth2
-    authorizationUrl: http://petstore.swagger.io/oauth/dialog
+    authorizationUrl: 'https://hmislynk.com/hmis-authorization-service/rest/token'
     flow: implicit
     scopes:
-      write:pets: modify pets in your account
-      read:pets: read your pets
+      write:uploads: upload a file
+      read:uploads: read the status of an upload
   api_key:
     type: apiKey
     name: api_key
@@ -163,7 +161,7 @@ definitions:
         format: int64
       status:
         type: string
-        description: pet status in the store
+        description: status of bulk upload
         enum:
         - INITIAL
         - ERROR
@@ -171,9 +169,6 @@ definitions:
         - LIVE
     xml:
       name: bulkUpload
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
 # Added by API Auto Mocking Plugin
 host: hslynk.com
 basePath: /hmis-upload-service/rest
