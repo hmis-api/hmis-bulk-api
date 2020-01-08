@@ -52,7 +52,7 @@ paths:
       - hmis_auth:
         - write:uploads
         - read:uploads
-  /bulk-upload/{uploadId}:
+  /bulk-upload/{uploadid}:
     get:
       tags:
       - bulk-upload
@@ -63,7 +63,7 @@ paths:
       - application/json
       - application/xml
       parameters:
-      - name: uploadId
+      - name: uploadid
         in: path
         description: Upload ID for bulkUpload.
         required: true
@@ -91,7 +91,7 @@ paths:
       - application/json
       - application/xml
       parameters:
-      - name: uploadId
+      - name: uploadid
         in: path
         description: HUD schema version,the possible values are 401, 411,51,611,612.
         required: true
