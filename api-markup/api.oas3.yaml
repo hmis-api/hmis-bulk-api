@@ -15,8 +15,103 @@ tags:
 # schemes:
 # - http
 paths:
+  /bulkupload:
+    get:
+      tags:
+      - bulk-upload
+      summary: Gets uploads by status
+      description: Get all the uploads by status.The possible values for status are INITIAL, STAGING, LIVE and ERROR.
+      operationId: findUploadByStatus
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: true
+        type: array
+        items:
+          type: string
+          enum:
+          - available
+          - pending
+          - sold
+          default: available
+        collectionFormat: multi
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/bulkUpload'
+        400:
+          description: Invalid status value
+      security:
+      - hmis_auth:
+        - write:uploads
+        - read:uploads
+  /bulkupload/{uploadid}:
+    get:
+      tags:
+      - bulk-upload
+      summary: Find bulk upload by ID
+      description: Returns a single upload
+      operationId: getUploadById
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: uploadid
+        in: path
+        description: Upload ID for bulkUpload.
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/bulkUpload'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Pet not found
+      security:
+      - api_key: []
+    post:
+      tags:
+      - bulk-upload
+      summary: Upload Hmis file by passing version in the path param.
+      operationId: createUploadWithForm
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: uploadid
+        in: path
+        description: HUD schema version,the possible values are 401, 411,51,611,612.
+        required: true
+        type: integer
+        format: string
+      - name: file
+        in: formData
+        description: Updated name of the Upload
+        required: false
+        type: string
+      responses:
+        405:
+          description: Invalid input
+      security:
+      - hmis_auth:
+        - write:uploads
+        - read:uploads
   /bulk-upload:
     get:
+      deprecated: true    
       tags:
       - bulk-upload
       summary: Gets uploads by status
@@ -54,6 +149,7 @@ paths:
         - read:uploads
   /bulk-upload/{uploadid}:
     get:
+      deprecated: true    
       tags:
       - bulk-upload
       summary: Find bulk upload by ID
@@ -81,6 +177,7 @@ paths:
       security:
       - api_key: []
     post:
+      deprecated: true    
       tags:
       - bulk-upload
       summary: Upload Hmis file by passing version in the path param.
@@ -169,6 +266,7 @@ definitions:
         - LIVE
     xml:
       name: bulkUpload
+      
 # Added by API Auto Mocking Plugin
 host: hslynk.com
 basePath: /hmis-upload-service/rest
