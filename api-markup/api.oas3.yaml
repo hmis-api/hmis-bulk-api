@@ -20,7 +20,7 @@ paths:
       tags:
       - bulk-upload
       summary: Gets uploads by status
-      description: Get all the uploads by status.The possible values for status are INITIAL, STAGING, LIVE and ERROR.
+      description: Get all the uploads by status.The possible values for status are INITIAL, INPROGRESS, ENROLLMENT ,EXIT, STAGING and ERROR.
       operationId: findUploadByStatus
       produces:
       - application/json
@@ -34,9 +34,12 @@ paths:
         items:
           type: string
           enum:
-          - available
-          - pending
-          - sold
+          - INITIAL
+          - INPROGRESS
+          - ENROLLMENT
+          - EXIT
+          - STAGING
+          - ERROR
           default: available
         collectionFormat: multi
       responses:
