@@ -34,10 +34,13 @@ paths:
         items:
           type: string
           enum:
-          - available
-          - pending
-          - sold
-          default: available
+            - INITIAL
+            - INPROGRESS
+            - ENROLLMENT
+            - EXIT
+            - STAGING
+            - ERROR
+          default: INITIAL
         collectionFormat: multi
       responses:
         200:
@@ -111,7 +114,7 @@ paths:
         - read:uploads
   /bulk-upload:
     get:
-      deprecated: true    
+      deprecated: true
       tags:
       - bulk-upload
       summary: Gets uploads by status
@@ -135,7 +138,7 @@ paths:
           - EXIT
           - STAGING
           - ERROR
-          default: available
+          default: INITIAL
         collectionFormat: multi
       responses:
         200:
@@ -152,7 +155,7 @@ paths:
         - read:uploads
   /bulk-upload/{uploadid}:
     get:
-      deprecated: true    
+      deprecated: true
       tags:
       - bulk-upload
       summary: Find bulk upload by ID
@@ -180,7 +183,7 @@ paths:
       security:
       - api_key: []
     post:
-      deprecated: true    
+      deprecated: true
       tags:
       - bulk-upload
       summary: Upload Hmis file by passing version in the path param.
@@ -269,7 +272,7 @@ definitions:
         - LIVE
     xml:
       name: bulkUpload
-      
+
 # Added by API Auto Mocking Plugin
 host: hslynk.com
 basePath: /hmis-upload-service/rest
