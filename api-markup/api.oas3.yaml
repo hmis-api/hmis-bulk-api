@@ -22,7 +22,18 @@ paths:
       tags:
       - bulk-upload
       summary: Gets uploads by status
-      description: Get all the uploads by status.The possible values for status are INITIAL, STAGING, LIVE and ERROR.
+      description: Get all the uploads by status.The possible values for status are
+      S3          - When a file is about to be pushed to S3.
+      INITIAL     - The HUD CSV/XML is in S3 and is ready for the bulkupload worker.
+      INPROGRESS  - Worker process  is processing client records.
+      ENROLLMENT  - Worker process has is processing enrollment reords.
+      C_CLIENT    - Worker process has is processing records for all children elements for client.
+      C_EMENT     - Worker process has is processing records for all children elements for enrollment.
+      EXIT        - Worker process has is processing exit records.
+      C_EXIT      - Worker process has is processing records for all children elements for exit.
+      DISAB       - Worker process has is processing records for all the disabilities records.
+      LIVE        - Worker process has  completed process of the entire file.
+      ERROR       - Worker process failed due to invalid fail format.
       operationId: findUploadByStatus
       produces:
       - application/json
