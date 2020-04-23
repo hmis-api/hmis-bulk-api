@@ -14,6 +14,8 @@ tags:
   description: Hmis bulk uploader Apis.
 # schemes:
 # - http
+servers:
+  - url: 'https://api.hslynk.com/hmis-upload-service/rest'
 paths:
   /bulkupload:
     get:
