@@ -37,10 +37,15 @@ paths:
           type: string
           enum:
             - INITIAL
+            - S3
             - INPROGRESS
             - ENROLLMENT
+            - C_CLIENT
+            - C_EMENT
             - EXIT
-            - STAGING
+            - C_EXIT
+            - DISAB
+            - LIVE
             - ERROR
           default: INITIAL
         collectionFormat: multi
@@ -135,10 +140,15 @@ paths:
           type: string
           enum:
           - INITIAL
+          - S3
           - INPROGRESS
           - ENROLLMENT
+          - C_CLIENT
+          - C_EMENT
           - EXIT
-          - STAGING
+          - C_EXIT
+          - DISAB
+          - LIVE
           - ERROR
           default: INITIAL
         collectionFormat: multi
@@ -269,9 +279,16 @@ definitions:
         description: status of bulk upload
         enum:
         - INITIAL
-        - ERROR
-        - STAGING
+        - S3
+        - INPROGRESS
+        - ENROLLMENT
+        - C_CLIENT
+        - C_EMENT
+        - EXIT
+        - C_EXIT
+        - DISAB
         - LIVE
+        - ERROR
     xml:
       name: bulkUpload
 
