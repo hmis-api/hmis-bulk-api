@@ -5,10 +5,13 @@ info:
   version: 1.0.1
   title: HMIS upload Service
   contact:
+    name: API Source
     email: support@hslynk.com
+    url: https://github.com/hmis-api/hmis-bulk-api
+  # Name of the license and a URL to the license description.
   license:
-    name: Hslynk
-    url: https://github.com/hmis-api/
+    name: Open Source License
+    url: https://github.com/hmis-api/hmis-bulk-api/blob/master/LICENSE
 tags:
 - name: bulk-upload
   description: Hmis bulk uploader Apis.
